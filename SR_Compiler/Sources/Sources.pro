@@ -50,8 +50,8 @@ SOURCES += \
     GL_Module/GlWidget.cpp \
     GL_Module/cameraGL.cpp \
     Parameters/Parameters.cpp \
-    QML/QML_ImageProvider.cpp \
-    QML/QML_Widget.cpp
+    Interface/main_windows.cpp \
+    Interface/toolbar.cpp
 
 
 HEADERS  += \
@@ -70,8 +70,8 @@ HEADERS  += \
     GL_Module/GlWidget.h \
     GL_Module/cameraGL.h \
     Parameters/Parameters.h \
-    QML/QML_ImageProvider.h \
-    QML/QML_Widget.h
+    Interface/main_windows.h \
+    Interface/toolbar.h
 
 MOC_DIR = .moc
 OBJECTS_DIR = .obj

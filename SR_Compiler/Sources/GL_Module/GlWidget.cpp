@@ -50,7 +50,7 @@ void GLWidget::initializeGL() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     tFPS->start();
-    tRender->start(16, this);
+    tRender->start(32, this); // 16 is for 60FPS, 32 for 30FPS
 
 }
 

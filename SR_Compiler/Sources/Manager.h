@@ -10,9 +10,8 @@
 #include "GL_Module/GlWidget.h"
 #include "GL_Module/SceneRoot.h"
 
-#include "QML/QML_ImageProvider.h"
-#include "QML/QML_Widget.h"
-
+#include "Interface/main_windows.h"
+#include "Interface/toolbar.h"
 
 class Manager_Class : public QObject
 {
@@ -21,15 +20,22 @@ class Manager_Class : public QObject
 public:
     explicit Manager_Class(QStringList Commands =  QStringList());
     bool isValid; // Mandatory for initialisation ...
-
     void init_scene();
+
+public slots:
+    void resize_widget();
+
+
+signals:
 
 
 private:
     GLWidget* GL_Widget;
     Scene_Root_Class* scene;
+    Main_Windows* SR_Compiler_Windows;
+    Toolbar* my_toolbar;
+    QWidget* Main_Panel;
+    QWidget* Secondary_Panel;
 
-    QML_Widget_Class* QML_Widget;
-    QML_ImageProvider* ImageProvider;
 };
 #endif
