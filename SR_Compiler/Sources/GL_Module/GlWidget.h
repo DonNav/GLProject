@@ -8,7 +8,6 @@
 #include <QtCore/qmath.h>
 #include <QtOpenGL/QGLFunctions>
 #include <iostream>
-#include <QtWidgets/QFileDialog>
 
 #include "mymesh.h"
 #include "SceneRoot.h"
@@ -51,9 +50,7 @@ public slots:
     void init() { initializeGL();}
 
     void setMousePressEvent(QMouseEvent *event) { this->mousePressEvent(event);}
-    void setMousePressEvent(int x, int y);
     void setMouseMoveEvent(QMouseEvent *event) { this->mouseMoveEvent(event);}
-    void setMouseMoveEvent(int x, int y);
     void wheelEvent ( QWheelEvent * event );
 
     void setMode(QString Widget_Mode);
@@ -61,12 +58,9 @@ public slots:
     void setSize(QSize Widget_Size);
     void setShow(bool Widget_Status);
 
-    void  Open();
-    void Export();
 
 signals:
     void paintOver();
-    void finished(QImage);
 
 private:
     int Width, Height;

@@ -2,7 +2,7 @@
 //##################################################################
 Manager_Class::Manager_Class(QStringList Commands)
 {
-    qmlRegisterType<QML_ImageProvider>("CustomComponents", 1, 0, "SharedImage");
+    //qmlRegisterType<QML_ImageProvider>("CustomComponents", 1, 0, "SharedImage");
 
     this->isValid = true;
     Parameters_Class *Settings = new Parameters_Class(Commands);
@@ -21,17 +21,17 @@ Manager_Class::Manager_Class(QStringList Commands)
     GL_Widget->setShow(true);
 
 
-    QML_Widget = new QML_Widget_Class();
-    QML_Widget->setSize(QSize(Settings->value("width",  View.width()), Settings->value("height",  View.height())));
-    QML_Widget->show();
+//    QML_Widget = new QML_Widget_Class();
+//    QML_Widget->setSize(QSize(Settings->value("width",  View.width()), Settings->value("height",  View.height())));
+//    QML_Widget->show();
 
-    QString ObjectQML = QString("ImageProvider");
-    ImageProvider = QML_Widget->rootObject()->findChild<QML_ImageProvider*>(ObjectQML.toLatin1().data());
+//    QString ObjectQML = QString("ImageProvider");
+//    ImageProvider = QML_Widget->rootObject()->findChild<QML_ImageProvider*>(ObjectQML.toLatin1().data());
 
-    QObject::connect(this->GL_Widget, SIGNAL(finished(QImage)), this->ImageProvider, SLOT(updateImage(QImage)));
+//    QObject::connect(this->GL_Widget, SIGNAL(finished(QImage)), this->ImageProvider, SLOT(updateImage(QImage)));
 
-    QML_Widget->rootContext()->setContextProperty("GL_Manager",this->GL_Widget);
-    QML_Widget->rootContext()->setContextProperty("Scene_Manager",this->scene);
+//    QML_Widget->rootContext()->setContextProperty("GL_Manager",this->GL_Widget);
+//    QML_Widget->rootContext()->setContextProperty("Scene_Manager",this->scene);
 
 
 }

@@ -1,7 +1,17 @@
 #include "GlWidget.h"
 
+static double radians( double degrees ){
+    return ( M_PI*degrees ) / 180;
+}
+
+static double degree( double radians ){
+    return ( 180*radians ) / M_PI;
+}
+
+
 GLWidget::GLWidget(QWidget *parent) : QGLWidget(parent), tRender(new QBasicTimer)
 {
+    this->setWindowFlags(Qt::FramelessWindowHint);// Set Windows to Borderless
 
     setAttribute(Qt::WA_PaintOnScreen);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -33,7 +43,7 @@ void GLWidget::initializeGL() {
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glEnable(GL_DEPTH_TEST);
-    glDisable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_BLEND);
     glDepthFunc(GL_LEQUAL);
@@ -62,19 +72,19 @@ void GLWidget::paintGL() {
     painter.endNativePainting();
 
 
-//    painter.setPen(Qt::white);
+    painter.setPen(Qt::white);
 
-//    int fps = tFPS->restart();
+    int fps = tFPS->restart();
 
     if(NULL != this->camera){
-//        this->camera->setYRotation(this->camera->getYRot() + (float)fps/60.0);
+        this->camera->setYRotation(this->camera->getYRot() + (float)fps/60.0);
     }
 
- //   painter.drawText(20, 40, QString::number(1000/fps) + " fps");
+    painter.drawText(20, 40, QString::number(1000/fps) + " fps");
 
     painter.end();
 
-  // swapBuffers();
+   swapBuffers();
 
 
 }
@@ -82,12 +92,12 @@ void GLWidget::paintGL() {
 
 void GLWidget::direct_render(){
     render_OffScreen();
-//    renderGL();
+    renderGL();
 }
 
 void GLWidget::render_OffScreen(){
     if ( NULL == m_render_offscreen) {
-        m_render_offscreen =  new QGLFramebufferObject(this->Width, this->Height,QGLFramebufferObject::Depth, GL_TEXTURE_2D );
+        m_render_offscreen =  new QGLFramebufferObject(this->Width, this->Height,QGLFramebufferObject::Depth, GL_TEXTURE_2D);
     }
     if (!m_render_offscreen->isValid()) qDebug() << "fbo m_render_offscreen  isn't valid";
     if (!m_render_offscreen->bind()) qDebug() << "fbo m_render_offscreen is not bind";
@@ -128,9 +138,6 @@ void GLWidget::render_OffScreen(){
     glFlush();
 
     m_render_offscreen->release();
-
-
-    emit finished(m_render_offscreen->toImage());
 
 }
 
@@ -243,22 +250,6 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event) {
 
 }
 
-void GLWidget::setMousePressEvent(int x, int y){
-
-    lastPos = QPoint(x,y);
-}
-
-void  GLWidget::setMouseMoveEvent(int x, int y){
-    int dx = x - lastPos.x();
-    int dy = y - lastPos.y();
-
-    camera->setXRotation(camera->getXRot() + dy);
-    camera->setYRotation(camera->getYRot() + dx);
-
-    lastPos = QPoint(x,y);
-}
-
-
 void GLWidget::keyPressEvent(QKeyEvent *event){
    if(event->key() == Qt::Key_Escape)
         close();
@@ -270,13 +261,12 @@ void GLWidget::wheelEvent ( QWheelEvent * event ){
 
 // ######################################################################
 void GLWidget::setSize(QSize Widget_Size)
-{  
+{
     Width = Widget_Size.width();
     Height = Widget_Size.height();
     this->resize(Width, Height);
     this->setFixedSize(Width, Height);
     this->resizeGL(Width, Height);
-    if (NULL != m_render_offscreen) m_render_offscreen =  new QGLFramebufferObject(this->Width, this->Height,QGLFramebufferObject::Depth, GL_TEXTURE_2D );
 }
 // ######################################################################
 void GLWidget::setPosition(QPoint Widget_Position)
@@ -298,17 +288,5 @@ void GLWidget::setShow(bool Widget_Status)
         return;
     }
     this->show();
-
 }
 // ######################################################################
-void  GLWidget::Open(){
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open 3D file"), "./", tr("3D Files (*.obj *.far *.dna)"));
-    if (NULL != this->scene)
-            scene->addObject(fileName);
-}
-
-void  GLWidget::Export(){
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save 3D file"), "./", tr("3D Files ( *.dna)"));
-    if (NULL != this->scene)
-            scene->export3d(fileName);
-}

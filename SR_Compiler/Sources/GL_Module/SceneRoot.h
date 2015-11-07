@@ -34,10 +34,6 @@ public slots:
         void setBackgroundColor(QVector4D* Color){ this->backgroundColor = Color;}
         void setBackgroundColor(double r, double g, double b, double a){ if(NULL == this->backgroundColor) backgroundColor= new QVector4D(r,g,b,a); else {backgroundColor->setW(a);backgroundColor->setX(r);backgroundColor->setY(g);backgroundColor->setZ(b);}}
 
-        void setNewMainColor(int x, int y, int width, int height);
-        void setMainCarColor(float r, float g, float b, float a){ this->main_car_color = QVector4D(r,g,b,a);}
-        QVector4D getMainCarColor(){return this->main_car_color;}
-        QString getMainColor(){ return QColor(main_car_color.x()*255, main_car_color.y()*255, main_car_color.z()*255,255).name();}
 
         void reset();
         void addObject(QString path);

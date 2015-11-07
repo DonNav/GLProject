@@ -25,15 +25,13 @@ Scene_Root_Class::Scene_Root_Class(QObject *parent) :
         light->setQuadraticAttenuation(0.009f);
         light->setPointLight(true);
 
-        main_car_color = QVector4D(0.0015,0.0015,0.0015,1.0);
-
 
         mSkyBox = NULL;
-        imgPicker = QImage("://Graphics/Standard/Images/colorPicker.png");
+
 
         mMaterial = new myMaterial();
-        mMaterial->setAmbient(0.038,0.038,0.038,1.0);
-        mMaterial->setDiffuse(&main_car_color);
+        mMaterial->setAmbient(0.0,0.0,0.0,1.0);
+        mMaterial->setDiffuse(0.0015,0.0015,0.0015,1.0);
         mMaterial->setSpecular(0.605,0.608,0.605,1.0);
         mMaterial->setGloss(50);
 }
@@ -51,10 +49,7 @@ int Scene_Root_Class::draw(CameraGL* camera, QMatrix4x4 projection, QMatrix4x4 v
     return s;
 }
 
-void Scene_Root_Class::setNewMainColor(int x, int y, int width, int height){
-    QColor color = imgPicker.pixel((float)x / width * imgPicker.width() ,(float)y / height * imgPicker.height());
-    main_car_color = QVector4D(color.redF(), color.greenF(), color.blueF(), 1.0);
-}
+
 
 void  Scene_Root_Class::reset(){
     rootList.clear();
