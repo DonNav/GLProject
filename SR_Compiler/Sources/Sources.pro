@@ -52,7 +52,8 @@ SOURCES += \
     Parameters/Parameters.cpp \
     Interface/main_windows.cpp \
     Interface/toolbar.cpp \
-    Interface/main_panel.cpp
+    Interface/main_panel.cpp \
+    Interface/second_panel.cpp
 
 
 HEADERS  += \
@@ -73,7 +74,8 @@ HEADERS  += \
     Parameters/Parameters.h \
     Interface/main_windows.h \
     Interface/toolbar.h \
-    Interface/main_panel.h
+    Interface/main_panel.h \
+    Interface/second_panel.h
 
 MOC_DIR = .moc
 OBJECTS_DIR = .obj

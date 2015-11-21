@@ -5,6 +5,7 @@
 #include <QToolButton>
 #include <QListWidget>
 #include <QFileDialog>
+#include <QDebug>
 
 class Main_Panel : public QWidget
 {
@@ -14,6 +15,9 @@ public:
 
 signals:
     void object_path(QString path);
+    void show_background_s_panel();
+    void show_fog_s_panel();
+    void show_camera_s_panel();
 public slots:
     void show_world_panel();
     void show_object_panel();
@@ -22,11 +26,14 @@ public slots:
     void show_setting_panel();
     void sizeChanged(int w, int h);
     void add_new_object();
-
+    void world_item_changed(QListWidgetItem* my_item);
+    void hide_all();
 private:
 
     QPalette Pal;
     QWidget * world_main_panel;
+    QListWidget * world_list;
+
 
     QWidget * object_main_panel;
     QToolButton * add_object;

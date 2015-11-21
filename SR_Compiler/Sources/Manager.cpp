@@ -36,11 +36,11 @@ Manager_Class::Manager_Class(QStringList Commands)
     my_main_Panel->show();
 
     //Secondary Panel instantation
-    Secondary_Panel = new QWidget(SR_Compiler_Windows);
-    Secondary_Panel->resize(0.7*SR_Compiler_Windows->width(), 0.3 * SR_Compiler_Windows->height());
-    Secondary_Panel->move(0.3*SR_Compiler_Windows->width(), 0.7 * SR_Compiler_Windows->height());
-    Secondary_Panel->setStyleSheet("background-color:#AAA; border-top: 1px solid #333;");
-    Secondary_Panel->show();
+    my_second_Panel = new Second_Panel(SR_Compiler_Windows);
+    my_second_Panel->sizeChanged(0.7*SR_Compiler_Windows->width(), 0.3 * SR_Compiler_Windows->height());
+    my_second_Panel->move(0.3*SR_Compiler_Windows->width(), 0.7 * SR_Compiler_Windows->height());
+    //my_second_Panel->setStyleSheet("background-color:#AAA; border-top: 1px solid #333;");
+    my_second_Panel->show();
 
     QObject::connect(SR_Compiler_Windows, SIGNAL(sizeChange()),this, SLOT(resize_widget()));
 
@@ -52,8 +52,14 @@ Manager_Class::Manager_Class(QStringList Commands)
     QObject::connect(my_toolbar, SIGNAL(btn_save_clicked()), my_main_Panel, SLOT(show_save_panel()));
     QObject::connect(my_toolbar, SIGNAL(btn_setting_clicked()), my_main_Panel, SLOT(show_setting_panel()));
 
-    //Main_panel conncetion
+    //Main_panel connection
     QObject::connect(my_main_Panel, SIGNAL(object_path(QString)), scene, SLOT(addObject(QString)));
+    QObject::connect(my_main_Panel, SIGNAL(show_background_s_panel()), my_second_Panel, SLOT(show_background_world_panel()));
+    QObject::connect(my_main_Panel, SIGNAL(show_camera_s_panel()), my_second_Panel, SLOT(show_camera_world_panel()));
+    QObject::connect(my_main_Panel, SIGNAL(show_fog_s_panel()), my_second_Panel, SLOT(show_fog_world_panel()));
+
+    //Second Panel Connection
+    QObject::connect(my_second_Panel, SIGNAL(backgroundColorChanged(QColor)), scene, SLOT(setBackgroundColor(QColor)));
 
     //Scene connection
     QObject::connect(scene, SIGNAL(sceneChanged()), GL_Widget, SLOT(worldHasChanged()));
@@ -70,8 +76,8 @@ void Manager_Class::resize_widget()
     my_toolbar->sizeChanged(0.05*SR_Compiler_Windows->width(), SR_Compiler_Windows->height());
     my_main_Panel->sizeChanged(0.25*SR_Compiler_Windows->width(), SR_Compiler_Windows->height());
     my_main_Panel->move(0.05*SR_Compiler_Windows->width(), 0);
-    Secondary_Panel->resize(0.7*SR_Compiler_Windows->width(), 0.3 * SR_Compiler_Windows->height());
-    Secondary_Panel->move(0.3*SR_Compiler_Windows->width(), 0.7 * SR_Compiler_Windows->height());
+    my_second_Panel->sizeChanged(0.7*SR_Compiler_Windows->width(), 0.3 * SR_Compiler_Windows->height());
+    my_second_Panel->move(0.3*SR_Compiler_Windows->width(), 0.7 * SR_Compiler_Windows->height());
 }
 
 
