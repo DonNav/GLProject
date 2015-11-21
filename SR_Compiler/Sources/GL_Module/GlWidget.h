@@ -58,6 +58,8 @@ public slots:
     void setSize(QSize Widget_Size);
     void setShow(bool Widget_Status);
 
+    void worldHasChanged() { this->hasChanged = true;}
+
 
 signals:
     void paintOver();
@@ -87,6 +89,7 @@ private:
 
     int count;
 
+    bool hasChanged;
 
 
 

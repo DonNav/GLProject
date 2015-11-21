@@ -26,6 +26,7 @@ public:
 
 
 signals:
+    void sceneChanged();
     
 public slots:
         int draw(CameraGL* camera, QMatrix4x4 projection, QMatrix4x4 view, QMatrix4x4 model);

@@ -11,46 +11,46 @@
 class CameraGL : public QObject
 {
     Q_OBJECT
-public:
-    explicit CameraGL(QObject *parent = 0);
+    public:
+        explicit CameraGL(QObject *parent = 0);
 
-signals:
+    signals:
 
-public slots:
-    void setXRotation(double angle);
-    void setYRotation(double angle);
-    void setZRotation(double angle);
-    double getXRot(){return xRot;}
-    double getYRot(){return yRot;}
-    double getZRot(){return zRot;}
+    public slots:
+        void setXRotation(double angle);
+        void setYRotation(double angle);
+        void setZRotation(double angle);
+        double getXRot(){return xRot;}
+        double getYRot(){return yRot;}
+        double getZRot(){return zRot;}
 
-    void setDistance(double distance);
-    double getDistance(){return this->distance;}
-    void zooming(double d){ this->distance -= d;}
-    QVector3D getQtPositionEye();
+        void setDistance(double distance);
+        double getDistance(){return this->distance;}
+        void zooming(double d){ this->distance -= d;}
+        QVector3D getQtPositionEye();
 
-    void setFarPlane(double fp){ this->farPlane = fp;}
-    double getFarPlane(){ return this->farPlane;}
+        void setFarPlane(double fp){ this->farPlane = fp;}
+        double getFarPlane(){ return this->farPlane;}
 
-    void setNearPlane(double np){this->nearPlane = np;}
-    double getNearPlane(){return this->nearPlane;}
+        void setNearPlane(double np){this->nearPlane = np;}
+        double getNearPlane(){return this->nearPlane;}
 
-    void setFOV(double f){this->fov = f;}
-    double getFOV(){return this->fov;}
+        void setFOV(double f){this->fov = f;}
+        double getFOV(){return this->fov;}
 
-    QMatrix4x4 lookAt();
+        QMatrix4x4 lookAt();
 
-private:
-    double distance;
-    double xRot;
-    double yRot;
-    double zRot;
+    private:
+        double distance;
+        double xRot;
+        double yRot;
+        double zRot;
 
-    double farPlane;
-    double nearPlane;
-    double fov;
+        double farPlane;
+        double nearPlane;
+        double fov;
 
-    Util_Move_Object_Class moveCamera;
+        Util_Move_Object_Class moveCamera;
 
 
 };

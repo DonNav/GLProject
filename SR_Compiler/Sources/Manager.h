@@ -12,6 +12,7 @@
 
 #include "Interface/main_windows.h"
 #include "Interface/toolbar.h"
+#include "Interface/main_panel.h"
 
 class Manager_Class : public QObject
 {
@@ -34,7 +35,7 @@ private:
     Scene_Root_Class* scene;
     Main_Windows* SR_Compiler_Windows;
     Toolbar* my_toolbar;
-    QWidget* Main_Panel;
+    Main_Panel* my_main_Panel;
     QWidget* Secondary_Panel;
 
 };

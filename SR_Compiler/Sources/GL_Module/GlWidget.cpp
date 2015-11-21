@@ -31,6 +31,7 @@ GLWidget::GLWidget(QWidget *parent) : QGLWidget(parent), tRender(new QBasicTimer
     this->tFPS = new QTime();
 
     count = 0;
+    hasChanged = true;
 }
 
 void GLWidget::setScene(Scene_Root_Class* sc) {
@@ -91,7 +92,10 @@ void GLWidget::paintGL() {
 
 
 void GLWidget::direct_render(){
-    render_OffScreen();
+    if (hasChanged){
+        render_OffScreen();
+        hasChanged = false;
+    }
     renderGL();
 }
 
@@ -240,13 +244,13 @@ void GLWidget::mousePressEvent(QMouseEvent *event) {
     lastPos = event->pos();
 }
 void GLWidget::mouseMoveEvent(QMouseEvent *event) {
-        int dx = event->x() - lastPos.x();
-        int dy = event->y() - lastPos.y();
+    int dx = event->x() - lastPos.x();
+    int dy = event->y() - lastPos.y();
 
-        camera->setXRotation(camera->getXRot() + dy);
-        camera->setYRotation(camera->getYRot() + dx);
-
-        lastPos = event->pos();
+    camera->setXRotation(camera->getXRot() + dy);
+    camera->setYRotation(camera->getYRot() + dx);
+    this->worldHasChanged();
+    lastPos = event->pos();
 
 }
 
@@ -256,6 +260,8 @@ void GLWidget::keyPressEvent(QKeyEvent *event){
 }
 void GLWidget::wheelEvent ( QWheelEvent * event ){
     this->camera->zooming(event->delta()/60);
+    this->worldHasChanged();
+
 }
 
 
@@ -267,6 +273,7 @@ void GLWidget::setSize(QSize Widget_Size)
     this->resize(Width, Height);
     this->setFixedSize(Width, Height);
     this->resizeGL(Width, Height);
+    this->worldHasChanged();
 }
 // ######################################################################
 void GLWidget::setPosition(QPoint Widget_Position)

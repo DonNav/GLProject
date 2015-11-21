@@ -51,7 +51,8 @@ SOURCES += \
     GL_Module/cameraGL.cpp \
     Parameters/Parameters.cpp \
     Interface/main_windows.cpp \
-    Interface/toolbar.cpp
+    Interface/toolbar.cpp \
+    Interface/main_panel.cpp
 
 
 HEADERS  += \
@@ -71,7 +72,8 @@ HEADERS  += \
     GL_Module/cameraGL.h \
     Parameters/Parameters.h \
     Interface/main_windows.h \
-    Interface/toolbar.h
+    Interface/toolbar.h \
+    Interface/main_panel.h
 
 MOC_DIR = .moc
 OBJECTS_DIR = .obj

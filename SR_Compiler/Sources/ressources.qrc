@@ -99,5 +99,11 @@
         <file>Graphics/Standard/Images/add.png</file>
         <file>Graphics/Standard/Images/export.png</file>
         <file>Graphics/Standard/Images/reset.png</file>
+        <file>Graphics/Standard/Images/icons_setting.png</file>
+        <file>Graphics/Standard/Images/icons_save.png</file>
+        <file>Graphics/Standard/Images/icons_quit.png</file>
+        <file>Graphics/Standard/Images/icons_light.png</file>
+        <file>Graphics/Standard/Images/object.png</file>
+        <file>Graphics/Standard/Images/world.png</file>
     </qresource>
 </RCC>

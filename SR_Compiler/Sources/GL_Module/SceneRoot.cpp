@@ -70,6 +70,7 @@ void  Scene_Root_Class::addObject(QString path){
     mNewMesh->setCurrShader(0);
     mNewMesh->mat = mMaterial;
     objectList.append(mNewMesh);
+    emit sceneChanged();
 }
 
 void  Scene_Root_Class::export3d(QString path){
